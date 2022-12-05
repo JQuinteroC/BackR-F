@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "cateogria_producto")
-public class CateogriaProducto {
+public class CategoriaProducto {
     @Id
     @Column(name = "pk_idcategoria", nullable = false)
     private Integer id;

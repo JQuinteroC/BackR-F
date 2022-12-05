@@ -27,7 +27,7 @@ public class Producto {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_idcategoria", nullable = false)
-    private CateogriaProducto fkIdcategoria;
+    private CategoriaProducto fkIdcategoria;
 
     @Column(name = "i_foto")
     private byte[] iFoto;
@@ -122,11 +122,11 @@ public class Producto {
         this.vPrecio = vPrecio;
     }
 
-    public CateogriaProducto getFkIdcategoria() {
+    public CategoriaProducto getFkIdcategoria() {
         return fkIdcategoria;
     }
 
-    public void setFkIdcategoria(CateogriaProducto fkIdcategoria) {
+    public void setFkIdcategoria(CategoriaProducto fkIdcategoria) {
         this.fkIdcategoria = fkIdcategoria;
     }
 
