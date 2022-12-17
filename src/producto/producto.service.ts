@@ -45,8 +45,11 @@ export class ProductoService {
       filename,
     );
     const producto = await this.productoRepository.getById(id);
-    producto.i_foto = foto;
-    producto.i_fotoId = foto.id;
+    producto.i_fotoId = foto;
+    delete producto.i_foto;
+    delete producto.ingredientes;
+    delete producto.menus;
+    console.log(producto);
     return await this.productoRepository.update(producto, id);
   }
 }

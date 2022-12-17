@@ -7,10 +7,15 @@ import {
   StreamableFile,
   Res,
   ParseIntPipe,
+  Post,
+  UploadedFile,
 } from '@nestjs/common';
 import DatabaseFilesService from './databaseFiles.service';
 import { Readable } from 'stream';
 import { Response } from 'express';
+import DatabaseFile from './databaseFile.entity';
+import { Express } from 'express';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('database-files')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -32,5 +37,14 @@ export default class DatabaseFilesController {
     });
 
     return new StreamableFile(stream);
+  }
+
+  @Post('foto')
+  @UseInterceptors(FileInterceptor('file'))
+  async newFoto(@UploadedFile() file: Express.Multer.File): Promise<number> {
+    return await this.databaseFilesService.uploadDatabaseFile(
+      file.buffer,
+      file.originalname,
+    );
   }
 }

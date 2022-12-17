@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CategoriaProductoEntity } from 'src/categoria_producto/categoria_producto.entity';
 import { IngredienteEntity } from 'src/ingrediente/ingrediente.entity';
-import { RestauranteEntity } from 'src/restaurante/restaurante.entity';
 import DatabaseFile from './databaseFile.entity';
 
 export class ProductoDTO {
@@ -32,9 +31,6 @@ export class ProductoDTO {
   @ApiProperty()
   readonly ingredientes: IngredienteEntity[];
 
-  @ApiProperty()
-  readonly restaurantes: RestauranteEntity[];
-
   constructor(
     pk_idCategoria: number,
     q_unidades: number,
@@ -43,7 +39,6 @@ export class ProductoDTO {
     v_precio: number,
     fk_idCategoria: CategoriaProductoEntity,
     ingredientes: IngredienteEntity[],
-    restaurantes: RestauranteEntity[],
     i_foto?: DatabaseFile,
     i_fotoId?: number,
   ) {
@@ -57,6 +52,5 @@ export class ProductoDTO {
     this.n_nombre = n_nombre;
     this.i_fotoId = i_fotoId;
     this.ingredientes = ingredientes;
-    this.restaurantes = restaurantes;
   }
 }

@@ -50,14 +50,14 @@ export class ProductoEntity {
 
   @ManyToMany(() => IngredienteEntity, (ingrediente) => ingrediente.productos)
   @JoinTable()
-  readonly ingredientes: IngredienteEntity[];
+  ingredientes: IngredienteEntity[];
 
   @ManyToMany(() => RestauranteEntity, (restaurante) => restaurante.productos)
   @JoinTable()
   readonly restaurantes: RestauranteEntity[];
 
   @ManyToMany(() => MenuEntity, (menu) => menu.productos)
-  readonly menus: MenuEntity[];
+  menus: MenuEntity[];
 
   @OneToMany(() => DetallePedidoEntity, (detalle) => detalle.fk_idPedido)
   readonly detalles: DetallePedidoEntity[];
@@ -70,7 +70,6 @@ export class ProductoEntity {
     v_precio: number,
     fk_idCategoria: CategoriaProductoEntity,
     ingredientes: IngredienteEntity[],
-    restaurantes: RestauranteEntity[],
     i_foto?: DatabaseFile,
     i_fotoId?: number,
   ) {
@@ -83,6 +82,5 @@ export class ProductoEntity {
     this.i_foto = i_foto;
     this.i_fotoId = i_fotoId;
     this.ingredientes = ingredientes;
-    this.restaurantes = restaurantes;
   }
 }

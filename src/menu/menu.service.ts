@@ -43,8 +43,7 @@ export class MenuService {
       filename,
     );
     const menu = await this.menuRepository.getById(id);
-    menu.i_foto = foto;
-    menu.i_fotoId = foto.id;
+    menu.i_fotoId = foto;
     return await this.menuRepository.update(menu, id);
   }
 }
