@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { env } from './config/configuration';
 import { IngredienteModule } from './ingrediente/ingrediente.module';
 import { CategoriaProductoModule } from './categoria_producto/categoria_producto.module';
+import { ProductoModule } from './producto/producto.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -22,6 +23,7 @@ import { CategoriaProductoModule } from './categoria_producto/categoria_producto
     TipoUnidadModule,
     IngredienteModule,
     CategoriaProductoModule,
+    ProductoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
