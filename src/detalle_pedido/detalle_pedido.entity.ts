@@ -3,7 +3,7 @@ import { PedidoEntity } from 'src/pedido/pedido.entity';
 import { ProductoEntity } from 'src/producto/producto.entity';
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 
-@Entity('DetallePedido')
+@Entity('Detalle_Pedido')
 export class DetallePedidoEntity {
   @PrimaryColumn({ type: 'int' })
   @ManyToOne(() => PedidoEntity, (pedido) => pedido.detalles)

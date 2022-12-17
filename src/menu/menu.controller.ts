@@ -15,8 +15,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 
-@Controller('restaurante')
-@ApiTags('restaurante')
+@Controller('menu')
+@ApiTags('menu')
 export class MenuController {
   constructor(private menuService: MenuService) {}
 
