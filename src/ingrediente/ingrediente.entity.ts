@@ -1,9 +1,16 @@
+import { ProductoEntity } from 'src/producto/producto.entity';
 import { TipoUnidadEntity } from 'src/tipo_unidad/tipo_unidad.entity';
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  ManyToMany,
+} from 'typeorm';
 
 @Entity('Ingrediente')
 export class IngredienteEntity {
-  @PrimaryGeneratedColumn('identity')
+  @PrimaryGeneratedColumn('increment')
   readonly pk_idIngrediente: number;
 
   @Column()
@@ -14,6 +21,9 @@ export class IngredienteEntity {
 
   @Column()
   readonly n_nombre: string;
+
+  @ManyToMany(() => ProductoEntity, (producto) => producto.ingredientes)
+  readonly productos: ProductoEntity;
 
   constructor(
     pk_idIngrediente: number,

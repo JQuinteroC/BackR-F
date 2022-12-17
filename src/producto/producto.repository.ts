@@ -9,33 +9,36 @@ import { ProductoMapper } from './producto.mapper';
 export class ProductoRepository {
   constructor(
     @InjectRepository(ProductoEntity)
-    private ingredienteEntity: Repository<ProductoEntity>,
+    private productoEntity: Repository<ProductoEntity>,
     private mapper: ProductoMapper,
   ) {}
 
   getAll(): Promise<ProductoEntity[]> {
-    return this.ingredienteEntity.find();
+    return this.productoEntity.find({
+      relations: { fk_idCategoria: true, ingredientes: true, menus: true },
+    });
   }
 
   getById(id: number): Promise<ProductoEntity> {
-    return this.ingredienteEntity.findOne({
+    return this.productoEntity.findOne({
       where: { pk_idProducto: id },
+      relations: { fk_idCategoria: true, ingredientes: true, menus: true },
     });
   }
 
   new(productoDTO: ProductoDTO): Promise<ProductoEntity> {
-    const newTipoUnidad = this.mapper.dtoToEntity(productoDTO);
-    return this.ingredienteEntity.save(newTipoUnidad);
+    const newProducto = this.mapper.dtoToEntity(productoDTO);
+    return this.productoEntity.save(newProducto);
   }
 
   async update(productoDTO: ProductoDTO, id: number): Promise<ProductoEntity> {
     productoDTO.pk_idProducto = id;
-    const updateUser = this.mapper.dtoToEntity(productoDTO);
-    await this.ingredienteEntity.update(id, updateUser);
-    return this.ingredienteEntity.findOne({ where: { pk_idProducto: id } });
+    const updateProducto = this.mapper.dtoToEntity(productoDTO);
+    await this.productoEntity.update(id, updateProducto);
+    return this.productoEntity.findOne({ where: { pk_idProducto: id } });
   }
 
   delete(id: number): Promise<DeleteResult> {
-    return this.ingredienteEntity.delete(id);
+    return this.productoEntity.delete(id);
   }
 }

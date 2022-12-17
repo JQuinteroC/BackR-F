@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class DatabaseFile {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   public id: number;
 
   @Column()

@@ -12,6 +12,8 @@ export class ProductoMapper {
       productoDTO.i_personalizable,
       productoDTO.v_precio,
       productoDTO.fk_idCategoria,
+      productoDTO.ingredientes,
+      productoDTO.restaurantes,
       productoDTO.i_foto,
       productoDTO.i_fotoId,
     );
@@ -25,6 +27,8 @@ export class ProductoMapper {
       productoEntity.i_personalizable,
       productoEntity.v_precio,
       productoEntity.fk_idCategoria,
+      productoEntity.ingredientes,
+      productoEntity.restaurantes,
       productoEntity.i_foto,
       productoEntity.i_fotoId,
     );

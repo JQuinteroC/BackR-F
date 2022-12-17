@@ -7,7 +7,6 @@ import {
   Post,
   Put,
   UploadedFile,
-  Req,
   UseInterceptors,
 } from '@nestjs/common';
 import { ProductoDTO } from './producto.dto';

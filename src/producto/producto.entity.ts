@@ -1,4 +1,8 @@
 import { CategoriaProductoEntity } from 'src/categoria_producto/categoria_producto.entity';
+import { DetallePedidoEntity } from 'src/detalle_pedido/detalle_pedido.entity';
+import { IngredienteEntity } from 'src/ingrediente/ingrediente.entity';
+import { MenuEntity } from 'src/menu/menu.entity';
+import { RestauranteEntity } from 'src/restaurante/restaurante.entity';
 import {
   Column,
   Entity,
@@ -6,12 +10,15 @@ import {
   JoinColumn,
   OneToOne,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
 } from 'typeorm';
 import DatabaseFile from './databaseFile.entity';
 
 @Entity('Producto')
 export class ProductoEntity {
-  @PrimaryGeneratedColumn('identity')
+  @PrimaryGeneratedColumn('increment')
   readonly pk_idProducto: number;
 
   @Column()
@@ -41,6 +48,20 @@ export class ProductoEntity {
   @Column({ nullable: true })
   public i_fotoId?: number;
 
+  @ManyToMany(() => IngredienteEntity, (ingrediente) => ingrediente.productos)
+  @JoinTable()
+  readonly ingredientes: IngredienteEntity[];
+
+  @ManyToMany(() => RestauranteEntity, (restaurante) => restaurante.productos)
+  @JoinTable()
+  readonly restaurantes: RestauranteEntity[];
+
+  @ManyToMany(() => MenuEntity, (menu) => menu.productos)
+  readonly menus: MenuEntity[];
+
+  @OneToMany(() => DetallePedidoEntity, (detalle) => detalle.fk_idPedido)
+  readonly detalles: DetallePedidoEntity[];
+
   constructor(
     pk_idCategoria: number,
     n_nombre: string,
@@ -48,6 +69,8 @@ export class ProductoEntity {
     i_personalizable: boolean,
     v_precio: number,
     fk_idCategoria: CategoriaProductoEntity,
+    ingredientes: IngredienteEntity[],
+    restaurantes: RestauranteEntity[],
     i_foto?: DatabaseFile,
     i_fotoId?: number,
   ) {
@@ -59,5 +82,7 @@ export class ProductoEntity {
     this.fk_idCategoria = fk_idCategoria;
     this.i_foto = i_foto;
     this.i_fotoId = i_fotoId;
+    this.ingredientes = ingredientes;
+    this.restaurantes = restaurantes;
   }
 }

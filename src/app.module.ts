@@ -7,6 +7,12 @@ import { env } from './config/configuration';
 import { IngredienteModule } from './ingrediente/ingrediente.module';
 import { CategoriaProductoModule } from './categoria_producto/categoria_producto.module';
 import { ProductoModule } from './producto/producto.module';
+import { ClienteModule } from './cliente/cliente.module';
+import { RestauranteModule } from './restaurante/restaurante.module';
+import { MenuModule } from './menu/menu.module';
+import { PedidoModule } from './pedido/pedido.module';
+import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,11 +25,15 @@ import { ProductoModule } from './producto/producto.module';
       autoLoadEntities: true,
       synchronize: !!env.DB_SYNC,
     }),
-
     TipoUnidadModule,
     IngredienteModule,
     CategoriaProductoModule,
     ProductoModule,
+    ClienteModule,
+    RestauranteModule,
+    MenuModule,
+    PedidoModule,
+    DetallePedidoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
