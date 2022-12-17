@@ -44,17 +44,9 @@ export class ProductoService {
       imageBuffer,
       filename,
     );
-    return await this.productoRepository.update(
-      {
-        i_foto: foto,
-        i_fotoId: foto.id,
-        n_nombre: '',
-        q_unidades: 0,
-        i_personalizable: false,
-        v_precio: 0,
-        fk_idCategoria: undefined,
-      },
-      id,
-    );
+    const producto = await this.productoRepository.getById(id);
+    producto.i_foto = foto;
+    producto.i_fotoId = foto.id;
+    return await this.productoRepository.update(producto, id);
   }
 }
